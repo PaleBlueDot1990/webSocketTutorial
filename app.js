@@ -8,8 +8,11 @@ const io = socketIO(server)
 
 app.set('view engine', 'ejs');
 
-io.on("connection", () => {
-    console.log("connected!");
+io.on("connection", (socket) => {
+    console.log("connected " + socket.id);
+    socket.on("disconnect", () => {
+        console.log("disconneted " + socket.id)
+    });
 });
 
 app.get('/', (req, res) => {
